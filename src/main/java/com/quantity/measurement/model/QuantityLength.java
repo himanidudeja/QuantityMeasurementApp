@@ -39,7 +39,34 @@ public class QuantityLength {
         return targetUnit.fromFeet(valueInFeet);
     }
    
+    public QuantityLength add(QuantityLength other) {
+        if (other == null) {
+            throw new IllegalArgumentException("Other quantity cannot be null");
+        }
 
+        if (this.unit == null || other.unit == null) {
+            throw new IllegalArgumentException("Unit cannot be null");
+        }
+
+        if (!Double.isFinite(this.value) || !Double.isFinite(other.value)) {
+            throw new IllegalArgumentException("Invalid numeric value");
+        }
+
+        // Convert(feet)
+        double thisInFeet = this.toFeet();
+        double otherInFeet = other.toFeet();
+
+        // Add
+        double sumInFeet = thisInFeet + otherInFeet;
+
+        // Convert back to unit of first operand
+        double resultValue = this.unit.fromFeet(sumInFeet);
+
+        // Return new object (immutability)
+        return new QuantityLength(resultValue, this.unit);
+    }
+
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
