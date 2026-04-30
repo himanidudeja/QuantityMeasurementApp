@@ -1,9 +1,10 @@
 package com.quantity.measurement.model;
 
-import com.quantity.measurement.enums.IMeasurable;
 import com.quantity.measurement.enums.WeightUnit;
 
 public class QuantityWeight {
+
+
 
         private final Quantity<WeightUnit> quantity;
 
@@ -39,8 +40,6 @@ public class QuantityWeight {
         }
         return this.quantity.equals(((QuantityWeight) o).quantity);
     }
-
-
 //    public Quantity<IMeasurable> convertTo(WeightUnit weightUnit) {
 //    }
 }
