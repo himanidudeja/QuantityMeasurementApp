@@ -1,11 +1,13 @@
-package com.quantity.measurement.enums;
+package com.quantity.measurement.enumsImpl;
+
+import com.quantity.measurement.enums.IMeasurable;
 
 public enum LengthUnit implements IMeasurable {
 
     FEET(1.0),
     INCH(1.0 / 12),
-    YARDS(3.0),
-    CENTIMETERS(1.0 / 30.48);
+    YARD(3.0),
+    CM(1.0 / 30.48);
 
     private final double toFeetFactor;
 
@@ -31,7 +33,7 @@ public enum LengthUnit implements IMeasurable {
     }
 
     private void validate(double value) {
-        if (Double.isNaN(value) || Double.isInfinite(value)) {
+        if (!Double.isFinite(value)) {
             throw new IllegalArgumentException("Invalid value");
         }
     }
