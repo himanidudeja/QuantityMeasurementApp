@@ -6,8 +6,8 @@ public enum LengthUnit implements IMeasurable {
 
     FEET(1.0),
     INCH(1.0 / 12),
-    YARD(3.0),
-    CM(1.0 / 30.48);
+    YARDS(3.0),
+    CENTIMETERS(1.0 / 30.48);
 
     private final double toFeetFactor;
 
@@ -33,7 +33,7 @@ public enum LengthUnit implements IMeasurable {
     }
 
     private void validate(double value) {
-        if (!Double.isFinite(value)) {
+        if (Double.isNaN(value) || Double.isInfinite(value)) {
             throw new IllegalArgumentException("Invalid value");
         }
     }

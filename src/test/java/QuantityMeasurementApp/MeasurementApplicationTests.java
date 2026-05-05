@@ -1,11 +1,15 @@
 package QuantityMeasurementApp;
 
 import com.quantity.measurement.enumsImpl.VolumeUnit;
+
 import com.quantity.measurement.enumsImpl.WeightUnit;
 import com.quantity.measurement.model.Quantity;
 import com.quantity.measurement.model.QuantityWeight;
 import com.quantity.measurement.model.QuantityLength;
+import com.quantity.measurement.enums.IMeasurable;
 import com.quantity.measurement.enumsImpl.LengthUnit;
+import com.quantity.measurement.enumsImpl.TempratureUnit;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,8 +24,8 @@ class MeasurementApplicationTests {
     @Test
     void testEquality_YardToYard_SameValue() {
         assertEquals(
-                new QuantityLength(1.0, LengthUnit.YARD),
-                new QuantityLength(1.0, LengthUnit.YARD)
+                new QuantityLength(1.0, LengthUnit.YARDS),
+                new QuantityLength(1.0, LengthUnit.YARDS)
         );
     }
 
@@ -29,8 +33,8 @@ class MeasurementApplicationTests {
     @Test
     void testEquality_YardToYard_DifferentValue() {
         assertNotEquals(
-                new QuantityLength(1.0, LengthUnit.YARD),
-                new QuantityLength(2.0, LengthUnit.YARD)
+                new QuantityLength(1.0, LengthUnit.YARDS),
+                new QuantityLength(2.0, LengthUnit.YARDS)
         );
     }
 
@@ -38,7 +42,7 @@ class MeasurementApplicationTests {
     @Test
     void testEquality_YardToFeet_EquivalentValue() {
         assertEquals(
-                new QuantityLength(1.0, LengthUnit.YARD),
+                new QuantityLength(1.0, LengthUnit.YARDS),
                 new QuantityLength(3.0, LengthUnit.FEET)
         );
     }
@@ -48,7 +52,7 @@ class MeasurementApplicationTests {
     void testEquality_FeetToYard_EquivalentValue() {
         assertEquals(
                 new QuantityLength(3.0, LengthUnit.FEET),
-                new QuantityLength(1.0, LengthUnit.YARD)
+                new QuantityLength(1.0, LengthUnit.YARDS)
         );
     }
 
@@ -56,7 +60,7 @@ class MeasurementApplicationTests {
     @Test
     void testEquality_YardToInches_EquivalentValue() {
         assertEquals(
-                new QuantityLength(1.0, LengthUnit.YARD),
+                new QuantityLength(1.0, LengthUnit.YARDS),
                 new QuantityLength(36.0, LengthUnit.INCH)
         );
     }
@@ -66,7 +70,7 @@ class MeasurementApplicationTests {
     void testEquality_InchesToYard_EquivalentValue() {
         assertEquals(
                 new QuantityLength(36.0, LengthUnit.INCH),
-                new QuantityLength(1.0, LengthUnit.YARD)
+                new QuantityLength(1.0, LengthUnit.YARDS)
         );
     }
 
@@ -74,7 +78,7 @@ class MeasurementApplicationTests {
     @Test
     void testEquality_YardToFeet_NonEquivalentValue() {
         assertNotEquals(
-                new QuantityLength(1.0, LengthUnit.YARD),
+                new QuantityLength(1.0, LengthUnit.YARDS),
                 new QuantityLength(2.0, LengthUnit.FEET)
         );
     }
@@ -83,7 +87,7 @@ class MeasurementApplicationTests {
     @Test
     void testEquality_CMToInches_EquivalentValue() {
         assertEquals(
-                new QuantityLength(1.0, LengthUnit.CM),
+                new QuantityLength(1.0, LengthUnit.CENTIMETERS),
                 new QuantityLength(0.393701, LengthUnit.INCH)
         );
     }
@@ -92,7 +96,7 @@ class MeasurementApplicationTests {
     @Test
     void testEquality_CMToFeet_NonEquivalentValue() {
         assertNotEquals(
-                new QuantityLength(1.0, LengthUnit.CM),
+                new QuantityLength(1.0, LengthUnit.CENTIMETERS),
                 new QuantityLength(1.0, LengthUnit.FEET)
         );
     }
@@ -100,7 +104,7 @@ class MeasurementApplicationTests {
     // 10 (Transitive property)
     @Test
     void testEquality_MultiUnit_TransitiveProperty() {
-        QuantityLength yard = new QuantityLength(1.0, LengthUnit.YARD);
+        QuantityLength yard = new QuantityLength(1.0, LengthUnit.YARDS);
         QuantityLength feet = new QuantityLength(3.0, LengthUnit.FEET);
         QuantityLength inch = new QuantityLength(36.0, LengthUnit.INCH);
 
@@ -120,14 +124,14 @@ class MeasurementApplicationTests {
     // 12 (Reflexive)
     @Test
     void testEquality_YARDameReference() {
-        QuantityLength q = new QuantityLength(1.0, LengthUnit.YARD);
+        QuantityLength q = new QuantityLength(1.0, LengthUnit.YARDS);
         assertEquals(q, q);
     }
 
     // 13
     @Test
     void testEquality_YardNullComparison() {
-        QuantityLength q = new QuantityLength(1.0, LengthUnit.YARD);
+        QuantityLength q = new QuantityLength(1.0, LengthUnit.YARDS);
         assertNotEquals(q, null);
     }
 
@@ -142,21 +146,21 @@ class MeasurementApplicationTests {
     // 15 (Reflexive)
     @Test
     void testEquality_CMSameReference() {
-        QuantityLength q = new QuantityLength(1.0, LengthUnit.CM);
+        QuantityLength q = new QuantityLength(1.0, LengthUnit.CENTIMETERS);
         assertEquals(q, q);
     }
 
     // 16
     @Test
     void testEquality_CMNullComparison() {
-        QuantityLength q = new QuantityLength(1.0, LengthUnit.CM);
+        QuantityLength q = new QuantityLength(1.0, LengthUnit.CENTIMETERS);
         assertNotEquals(q, null);
     }
 
     // 17 (Complex multi-unit)
     @Test
     void testEquality_AllUnits_ComplexScenario() {
-        QuantityLength yard = new QuantityLength(2.0, LengthUnit.YARD);
+        QuantityLength yard = new QuantityLength(2.0, LengthUnit.YARDS);
         QuantityLength feet = new QuantityLength(6.0, LengthUnit.FEET);
         QuantityLength inch = new QuantityLength(72.0, LengthUnit.INCH);
 
@@ -189,7 +193,7 @@ class MeasurementApplicationTests {
     // 3 (YARD → Inches)
     @Test
     void testConversion_YARDToInches() {
-        QuantityLength q = new QuantityLength(1.0, LengthUnit.YARD);
+        QuantityLength q = new QuantityLength(1.0, LengthUnit.YARDS);
 
         assertEquals(36.0,
                 q.toConvert(LengthUnit.INCH).getValue());
@@ -201,13 +205,13 @@ class MeasurementApplicationTests {
         QuantityLength q = new QuantityLength(72.0, LengthUnit.INCH);
 
         assertEquals(2.0,
-                q.toConvert(LengthUnit.YARD).getValue());
+                q.toConvert(LengthUnit.YARDS).getValue());
     }
 
     // 5 (CM → Inches)
     @Test
     void testConversion_CMToInches() {
-        QuantityLength q = new QuantityLength(2.54, LengthUnit.CM);
+        QuantityLength q = new QuantityLength(2.54, LengthUnit.CENTIMETERS);
 
         assertEquals(1.0,
                 q.toConvert(LengthUnit.INCH).getValue());
@@ -219,7 +223,7 @@ class MeasurementApplicationTests {
         QuantityLength q = new QuantityLength(6.0, LengthUnit.FEET);
 
         assertEquals(2.0,
-                q.toConvert(LengthUnit.YARD).getValue());
+                q.toConvert(LengthUnit.YARDS).getValue());
     }
 
     // 7 (Zero value)
@@ -270,7 +274,7 @@ class MeasurementApplicationTests {
     // 12 (Precision — based on your wrong CM factor)
     @Test
     void testConversion_PrecisionTolerance() {
-        QuantityLength q = new QuantityLength(1.0, LengthUnit.CM);
+        QuantityLength q = new QuantityLength(1.0, LengthUnit.CENTIMETERS);
 
         double result = q.getUnit().convertToBaseUnit(1.0);
         double expected = 1.0 / 30.48;
@@ -328,18 +332,18 @@ class MeasurementApplicationTests {
     // Test Case 5 (Cross unit: Yard + Feet → Yard)
     @Test
     void testAddition_CrossUnit_YardPlusFeet() {
-        QuantityLength yard = new QuantityLength(1.0, LengthUnit.YARD);
+        QuantityLength yard = new QuantityLength(1.0, LengthUnit.YARDS);
         QuantityLength feet = new QuantityLength(3.0, LengthUnit.FEET);
 
         QuantityLength result = yard.add(feet);
 
-        assertEquals(new QuantityLength(2.0, LengthUnit.YARD), result);
+        assertEquals(new QuantityLength(2.0, LengthUnit.YARDS), result);
     }
 
     // Test Case 6 (Cross unit: CM + Inch → CM)
     @Test
     void testAddition_CrossUnit_CentimeterPlusInch() {
-        QuantityLength cm = new QuantityLength(2.54, LengthUnit.CM);
+        QuantityLength cm = new QuantityLength(2.54, LengthUnit.CENTIMETERS);
         QuantityLength inch = new QuantityLength(1.0, LengthUnit.INCH);
 
         QuantityLength result = cm.add(inch);
@@ -444,7 +448,7 @@ class MeasurementApplicationTests {
         QuantityLength q1 = new QuantityLength(1.0, LengthUnit.FEET);
         QuantityLength q2 = new QuantityLength(12.0, LengthUnit.INCH);
 
-        QuantityLength result = q1.add(q2, LengthUnit.YARD);
+        QuantityLength result = q1.add(q2, LengthUnit.YARDS);
 
         assertEquals(0.6666667, result.getValue(), 1e-6);
     }
@@ -452,10 +456,10 @@ class MeasurementApplicationTests {
     // Test Case 4 (Explicit target = CM)
     @Test
     void testAddition_ExplicitTargetUnit_CM() {
-        QuantityLength q1 = new QuantityLength(2.54, LengthUnit.CM);
+        QuantityLength q1 = new QuantityLength(2.54, LengthUnit.CENTIMETERS);
         QuantityLength q2 = new QuantityLength(1.0, LengthUnit.INCH);
 
-        QuantityLength result = q1.add(q2, LengthUnit.CM);
+        QuantityLength result = q1.add(q2, LengthUnit.CENTIMETERS);
 
         assertEquals(5.08, result.getValue(), 1e-6);
     }
@@ -463,19 +467,19 @@ class MeasurementApplicationTests {
     // Test Case 5 (Target = first operand)
     @Test
     void testAddition_ExplicitTargetUnit_SameAsFirstOperand() {
-        QuantityLength q1 = new QuantityLength(1.0, LengthUnit.YARD);
+        QuantityLength q1 = new QuantityLength(1.0, LengthUnit.YARDS);
         QuantityLength q2 = new QuantityLength(6.0, LengthUnit.FEET);
 
         assertEquals(
-                new QuantityLength(3.0, LengthUnit.YARD),
-                q1.add(q2, LengthUnit.YARD)
+                new QuantityLength(3.0, LengthUnit.YARDS),
+                q1.add(q2, LengthUnit.YARDS)
         );
     }
 
     // Test Case 6 (Target = second operand)
     @Test
     void testAddition_ExplicitTargetUnit_SameAsSecondOperand() {
-        QuantityLength q1 = new QuantityLength(2.0, LengthUnit.YARD);
+        QuantityLength q1 = new QuantityLength(2.0, LengthUnit.YARDS);
         QuantityLength q2 = new QuantityLength(3.0, LengthUnit.FEET);
 
         assertEquals(
@@ -502,7 +506,7 @@ class MeasurementApplicationTests {
         QuantityLength q1 = new QuantityLength(5.0, LengthUnit.FEET);
         QuantityLength zero = new QuantityLength(0.0, LengthUnit.INCH);
 
-        QuantityLength result = q1.add(zero, LengthUnit.YARD);
+        QuantityLength result = q1.add(zero, LengthUnit.YARDS);
 
         assertEquals(1.6666667, result.getValue(), 1e-6);
     }
@@ -548,7 +552,7 @@ class MeasurementApplicationTests {
         QuantityLength q1 = new QuantityLength(1.0, LengthUnit.FEET);
         QuantityLength q2 = new QuantityLength(1.0, LengthUnit.FEET);
 
-        QuantityLength result = q1.add(q2, LengthUnit.YARD);
+        QuantityLength result = q1.add(q2, LengthUnit.YARDS);
 
         assertEquals(0.6666667, result.getValue(), 1e-6);
     }
@@ -568,10 +572,10 @@ class MeasurementApplicationTests {
     // Test Case 14 (Precision tolerance)
     @Test
     void testAddition_ExplicitTargetUnit_PrecisionTolerance() {
-        QuantityLength q1 = new QuantityLength(2.54, LengthUnit.CM);
+        QuantityLength q1 = new QuantityLength(2.54, LengthUnit.CENTIMETERS);
         QuantityLength q2 = new QuantityLength(1.0, LengthUnit.INCH);
 
-        QuantityLength result = q1.add(q2, LengthUnit.CM);
+        QuantityLength result = q1.add(q2, LengthUnit.CENTIMETERS);
 
         assertEquals(5.08, result.getValue(), 1e-6);
     }
@@ -593,13 +597,13 @@ class MeasurementApplicationTests {
     // Test Case 3 (YARD constant)
     @Test
     void testLengthUnitEnum_YARDConstant() {
-        assertEquals(3.0, LengthUnit.YARD.convertToBaseUnit(1.0));
+        assertEquals(3.0, LengthUnit.YARDS.convertToBaseUnit(1.0));
     }
 
     // Test Case 4 (CM constant)
     @Test
     void testLengthUnitEnum_CMConstant() {
-        assertEquals(1.0 / 30.48, LengthUnit.CM.convertToBaseUnit(1.0), EPSILON);
+        assertEquals(1.0 / 30.48, LengthUnit.CENTIMETERS.convertToBaseUnit(1.0), EPSILON);
     }
 
     // ===============================
@@ -621,13 +625,13 @@ class MeasurementApplicationTests {
     // Test Case 7 (YARD → Feet)
     @Test
     void testConvertToBaseUnit_YARDToFeet() {
-        assertEquals(3.0, LengthUnit.YARD.convertToBaseUnit(1.0));
+        assertEquals(3.0, LengthUnit.YARDS.convertToBaseUnit(1.0));
     }
 
     // Test Case 8 (CM → Feet)
     @Test
     void testConvertToBaseUnit_CMToFeet() {
-        assertEquals(1.0, LengthUnit.CM.convertToBaseUnit(30.48), EPSILON);
+        assertEquals(1.0, LengthUnit.CENTIMETERS.convertToBaseUnit(30.48), EPSILON);
     }
 
     // ===============================
@@ -649,13 +653,13 @@ class MeasurementApplicationTests {
     // Test Case 11 (Feet → YARD)
     @Test
     void testConvertFromBaseUnit_FeetToYARD() {
-        assertEquals(1.0, LengthUnit.YARD.convertFromBaseUnit(3.0));
+        assertEquals(1.0, LengthUnit.YARDS.convertFromBaseUnit(3.0));
     }
 
     // Test Case 12 (Feet → CM)
     @Test
     void testConvertFromBaseUnit_FeetToCM() {
-        assertEquals(30.48, LengthUnit.CM.convertFromBaseUnit(1.0), EPSILON);
+        assertEquals(30.48, LengthUnit.CENTIMETERS.convertFromBaseUnit(1.0), EPSILON);
     }
 
     // ===============================
@@ -697,7 +701,7 @@ class MeasurementApplicationTests {
         QuantityLength q1 = new QuantityLength(1.0, LengthUnit.FEET);
         QuantityLength q2 = new QuantityLength(12.0, LengthUnit.INCH);
 
-        QuantityLength result = q1.add(q2, LengthUnit.YARD);
+        QuantityLength result = q1.add(q2, LengthUnit.YARDS);
 
         assertEquals(0.6666667, result.getValue(), EPSILON);
     }
@@ -757,7 +761,7 @@ class MeasurementApplicationTests {
     void testBackwardCompatibility_UC4() {
         assertEquals(
                 new QuantityLength(3.0, LengthUnit.FEET),
-                new QuantityLength(1.0, LengthUnit.YARD)
+                new QuantityLength(1.0, LengthUnit.YARDS)
         );
     }
 
@@ -784,7 +788,7 @@ class MeasurementApplicationTests {
         QuantityLength q1 = new QuantityLength(1.0, LengthUnit.FEET);
         QuantityLength q2 = new QuantityLength(12.0, LengthUnit.INCH);
 
-        QuantityLength result = q1.add(q2, LengthUnit.YARD);
+        QuantityLength result = q1.add(q2, LengthUnit.YARDS);
 
         assertEquals(0.6666667, result.getValue(), EPSILON);
     }
@@ -1973,7 +1977,7 @@ class MeasurementApplicationTests {
     void testAddition_WithTargetUnit_Length() {
         assertEquals(0.6667,
                 new Quantity<>(1.0, LengthUnit.FEET)
-                        .add(new Quantity<>(12.0, LengthUnit.INCH), LengthUnit.YARD)
+                        .add(new Quantity<>(12.0, LengthUnit.INCH), LengthUnit.YARDS)
                         .getValue(),
                 1e-3);
     }
@@ -2065,7 +2069,7 @@ class MeasurementApplicationTests {
     void testSubtraction_WithTargetUnit() {
         assertEquals(0.3333,
                 new Quantity<>(2.0, LengthUnit.FEET)
-                        .subtract(new Quantity<>(12.0, LengthUnit.INCH), LengthUnit.YARD)
+                        .subtract(new Quantity<>(12.0, LengthUnit.INCH), LengthUnit.YARDS)
                         .getValue(),
                 1e-3);
     }
@@ -2303,5 +2307,307 @@ class MeasurementApplicationTests {
         assertFalse(new Quantity<>(1.0, LengthUnit.FEET)
                 .equals(new Quantity<>(1.0, WeightUnit.KILOGRAM)));
     }
+ // ===============================
+ // UC14 TEMPERATURE MEASUREMENT TESTS
+ // ===============================
+
+ // EQUALITY TESTS (11)
+ @Test
+ void testTemperatureEquality_CelsiusToCelsius_SameValue() {
+     assertTrue(new Quantity<>(0.0, TempratureUnit.CELSIUS)
+             .equals(new Quantity<>(0.0, TempratureUnit.CELSIUS)));
+ }
+
+ @Test
+ void testTemperatureEquality_FahrenheitToFahrenheit_SameValue() {
+     assertTrue(new Quantity<>(32.0, TempratureUnit.FAHRENHEIT)
+             .equals(new Quantity<>(32.0, TempratureUnit.FAHRENHEIT)));
+ }
+
+ @Test
+ void testTemperatureEquality_KelvinToKelvin_SameValue() {
+     assertTrue(new Quantity<>(273.15, TempratureUnit.KELVIN)
+             .equals(new Quantity<>(273.15, TempratureUnit.KELVIN)));
+ }
+
+ @Test
+ void testTemperatureEquality_CelsiusToFahrenheit_0Celsius32Fahrenheit() {
+     assertTrue(new Quantity<>(0.0, TempratureUnit.CELSIUS)
+             .equals(new Quantity<>(32.0, TempratureUnit.FAHRENHEIT)));
+ }
+
+ @Test
+ void testTemperatureEquality_CelsiusToFahrenheit_100Celsius212Fahrenheit() {
+     assertTrue(new Quantity<>(100.0, TempratureUnit.CELSIUS)
+             .equals(new Quantity<>(212.0, TempratureUnit.FAHRENHEIT)));
+ }
+
+ @Test
+ void testTemperatureEquality_CelsiusToKelvin_0Celsius() {
+     assertTrue(new Quantity<>(0.0, TempratureUnit.CELSIUS)
+             .equals(new Quantity<>(273.15, TempratureUnit.KELVIN)));
+ }
+
+ @Test
+ void testTemperatureEquality_100CelsiusTo373_15Kelvin() {
+     assertTrue(new Quantity<>(100.0, TempratureUnit.CELSIUS)
+             .equals(new Quantity<>(373.15, TempratureUnit.KELVIN)));
+ }
+
+ @Test
+ void testTemperatureEquality_CelsiusToFahrenheit_Negative40Equal() {
+     assertTrue(new Quantity<>(-40.0, TempratureUnit.CELSIUS)
+             .equals(new Quantity<>(-40.0, TempratureUnit.FAHRENHEIT)));
+ }
+
+ @Test
+ void testTemperatureEquality_SymmetricProperty() {
+     Quantity<TempratureUnit> a = new Quantity<>(0.0, TempratureUnit.CELSIUS);
+     Quantity<TempratureUnit> b = new Quantity<>(32.0, TempratureUnit.FAHRENHEIT);
+
+     assertTrue(a.equals(b));
+     assertTrue(b.equals(a));
+ }
+
+ @Test
+ void testTemperatureEquality_ReflexiveProperty() {
+     Quantity<TempratureUnit> q = new Quantity<>(100.0, TempratureUnit.CELSIUS);
+     assertTrue(q.equals(q));
+ }
+
+ @Test
+ void testTemperatureEquality_DifferentValues() {
+     assertFalse(new Quantity<>(50.0, TempratureUnit.CELSIUS)
+             .equals(new Quantity<>(100.0, TempratureUnit.CELSIUS)));
+ }
+
+ // CONVERSION TESTS (8)
+ @Test
+ void testTemperatureConversion_CelsiusToFahrenheit_VariousValues() {
+     Quantity<TempratureUnit> q1 = new Quantity<>(50.0, TempratureUnit.CELSIUS);
+     Quantity<TempratureUnit> result1 = q1.toConvert(TempratureUnit.FAHRENHEIT);
+     assertEquals(122.0, result1.getValue(), EPSILON);
+
+     Quantity<TempratureUnit> q2 = new Quantity<>(-20.0, TempratureUnit.CELSIUS);
+     Quantity<TempratureUnit> result2 = q2.toConvert(TempratureUnit.FAHRENHEIT);
+     assertEquals(-4.0, result2.getValue(), EPSILON);
+ }
+
+ @Test
+ void testTemperatureConversion_FahrenheitToCelsius_VariousValues() {
+     Quantity<TempratureUnit> q1 = new Quantity<>(122.0, TempratureUnit.FAHRENHEIT);
+     Quantity<TempratureUnit> result1 = q1.toConvert(TempratureUnit.CELSIUS);
+     assertEquals(50.0, result1.getValue(), EPSILON);
+
+     Quantity<TempratureUnit> q2 = new Quantity<>(-4.0, TempratureUnit.FAHRENHEIT);
+     Quantity<TempratureUnit> result2 = q2.toConvert(TempratureUnit.CELSIUS);
+     assertEquals(-20.0, result2.getValue(), EPSILON);
+ }
+
+ @Test
+ void testTemperatureConversion_CelsiusToKelvin() {
+     Quantity<TempratureUnit> q = new Quantity<>(0.0, TempratureUnit.CELSIUS);
+     Quantity<TempratureUnit> result = q.toConvert(TempratureUnit.KELVIN);
+
+     assertEquals(273.15, result.getValue(), EPSILON);
+     assertEquals(TempratureUnit.KELVIN, result.getUnit());
+ }
+
+ @Test
+ void testTemperatureConversion_KelvinToCelsius() {
+     Quantity<TempratureUnit> q = new Quantity<>(273.15, TempratureUnit.KELVIN);
+     Quantity<TempratureUnit> result = q.toConvert(TempratureUnit.CELSIUS);
+
+     assertEquals(0.0, result.getValue(), EPSILON);
+     assertEquals(TempratureUnit.CELSIUS, result.getUnit());
+ }
+
+ @Test
+ void testTemperatureConversion_SameUnit() {
+     Quantity<TempratureUnit> q = new Quantity<>(100.0, TempratureUnit.CELSIUS);
+     Quantity<TempratureUnit> result = q.toConvert(TempratureUnit.CELSIUS);
+
+     assertEquals(100.0, result.getValue(), EPSILON);
+     assertEquals(TempratureUnit.CELSIUS, result.getUnit());
+ }
+
+ @Test
+ void testTemperatureConversion_ZeroValue() {
+     Quantity<TempratureUnit> q = new Quantity<>(0.0, TempratureUnit.CELSIUS);
+     Quantity<TempratureUnit> result = q.toConvert(TempratureUnit.FAHRENHEIT);
+
+     assertEquals(32.0, result.getValue(), EPSILON);
+     assertEquals(TempratureUnit.FAHRENHEIT, result.getUnit());
+ }
+
+ @Test
+ void testTemperatureConversion_NegativeValues() {
+     Quantity<TempratureUnit> q = new Quantity<>(-40.0, TempratureUnit.CELSIUS);
+     Quantity<TempratureUnit> result = q.toConvert(TempratureUnit.FAHRENHEIT);
+
+     assertEquals(-40.0, result.getValue(), EPSILON);
+ }
+
+ @Test
+ void testTemperatureConversion_RoundTrip_PreservesValue() {
+     Quantity<TempratureUnit> original = new Quantity<>(100.0, TempratureUnit.CELSIUS);
+     Quantity<TempratureUnit> toF = original.toConvert(TempratureUnit.FAHRENHEIT);
+     Quantity<TempratureUnit> back = toF.toConvert(TempratureUnit.CELSIUS);
+
+     assertEquals(original.getValue(), back.getValue(), EPSILON);
+ }
+
+ // UNSUPPORTED OPERATION TESTS (4)
+ @Test
+ void testTemperatureUnsupportedOperation_Add() {
+     Quantity<TempratureUnit> q1 = new Quantity<>(100.0, TempratureUnit.CELSIUS);
+     Quantity<TempratureUnit> q2 = new Quantity<>(50.0, TempratureUnit.CELSIUS);
+
+     assertThrows(UnsupportedOperationException.class, () -> q1.add(q2));
+ }
+
+ @Test
+ void testTemperatureUnsupportedOperation_Subtract() {
+     Quantity<TempratureUnit> q1 = new Quantity<>(100.0, TempratureUnit.CELSIUS);
+     Quantity<TempratureUnit> q2 = new Quantity<>(50.0, TempratureUnit.CELSIUS);
+
+     assertThrows(UnsupportedOperationException.class, () -> q1.subtract(q2));
+ }
+
+ @Test
+ void testTemperatureUnsupportedOperation_Divide() {
+     Quantity<TempratureUnit> q1 = new Quantity<>(100.0, TempratureUnit.CELSIUS);
+     Quantity<TempratureUnit> q2 = new Quantity<>(50.0, TempratureUnit.CELSIUS);
+
+     assertThrows(UnsupportedOperationException.class, () -> q1.divide(q2));
+ }
+
+ @Test
+ void testTemperatureUnsupportedOperation_ErrorMessage() {
+     Quantity<TempratureUnit> q1 = new Quantity<>(100.0, TempratureUnit.CELSIUS);
+     Quantity<TempratureUnit> q2 = new Quantity<>(50.0, TempratureUnit.CELSIUS);
+
+     UnsupportedOperationException exception = assertThrows(
+             UnsupportedOperationException.class,
+             () -> q1.add(q2)
+     );
+
+     assertTrue(exception.getMessage().contains("Temperature does not support"));
+ }
+
+ // CROSS-CATEGORY INCOMPATIBILITY (3)
+ @Test
+ void testTemperatureVsLengthIncompatibility() {
+     assertFalse(new Quantity<>(100.0, TempratureUnit.CELSIUS)
+             .equals(new Quantity<>(100.0, LengthUnit.FEET)));
+ }
+
+ @Test
+ void testTemperatureVsWeightIncompatibility() {
+     assertFalse(new Quantity<>(50.0, TempratureUnit.CELSIUS)
+             .equals(new Quantity<>(50.0, WeightUnit.KILOGRAM)));
+ }
+
+ @Test
+ void testTemperatureVsVolumeIncompatibility() {
+     assertFalse(new Quantity<>(25.0, TempratureUnit.CELSIUS)
+             .equals(new Quantity<>(25.0, VolumeUnit.LITRE)));
+ }
+
+ // OPERATION SUPPORT METHODS (3)
+ @Test
+ void testOperationSupportMethods_TemperatureUnit_Addition() {
+     assertFalse(TempratureUnit.CELSIUS.supportsArithmetic());
+ }
+
+ @Test
+ void testOperationSupportMethods_LengthUnit_Addition() {
+     assertTrue(LengthUnit.FEET.supportsArithmetic());
+ }
+
+ @Test
+ void testOperationSupportMethods_WeightUnit_Division() {
+     assertTrue(WeightUnit.KILOGRAM.supportsArithmetic());
+ }
+
+ // VALIDATION & STRUCTURE (8)
+ @Test
+ void testTemperatureNullUnitValidation() {
+     assertThrows(NullPointerException.class,
+             () -> new Quantity<>(100.0, null));
+ }
+
+ @Test
+ void testIMeasurableInterface_BackwardCompatible() {
+     assertTrue(LengthUnit.FEET instanceof IMeasurable);
+     assertTrue(WeightUnit.KILOGRAM instanceof IMeasurable);
+     assertTrue(VolumeUnit.LITRE instanceof IMeasurable);
+     assertTrue(TempratureUnit.CELSIUS instanceof IMeasurable);
+ }
+
+ @Test
+ void testTemperatureUnit_NonLinearConversion() {
+     assertEquals(212.0, TempratureUnit.FAHRENHEIT.convertFromBaseUnit(100.0), EPSILON);
+     assertEquals(0.0, TempratureUnit.FAHRENHEIT.convertToBaseUnit(32.0), EPSILON);
+     assertEquals(373.15, TempratureUnit.KELVIN.convertFromBaseUnit(100.0), EPSILON);
+     assertEquals(0.0, TempratureUnit.KELVIN.convertToBaseUnit(273.15), EPSILON);
+ }
+
+ @Test
+ void testTemperatureUnit_AllConstants() {
+     assertNotNull(TempratureUnit.CELSIUS);
+     assertNotNull(TempratureUnit.FAHRENHEIT);
+     assertNotNull(TempratureUnit.KELVIN);
+ }
+
+ @Test
+ void testTemperatureDefaultMethodInheritance() {
+     assertTrue(LengthUnit.FEET.supportsArithmetic());
+     assertTrue(WeightUnit.KILOGRAM.supportsArithmetic());
+     assertTrue(VolumeUnit.LITRE.supportsArithmetic());
+     assertFalse(TempratureUnit.CELSIUS.supportsArithmetic());
+ }
+
+ @Test
+ void testTemperatureValidateOperationSupport_Throws() {
+     assertThrows(UnsupportedOperationException.class,
+             () -> TempratureUnit.CELSIUS.validateOperationSupport("ADD"));
+ }
+
+ @Test
+ void testTemperatureIntegrationWithGenericQuantity() {
+     Quantity<TempratureUnit> q = new Quantity<>(100.0, TempratureUnit.CELSIUS);
+     assertNotNull(q);
+     assertEquals(100.0, q.getValue(), EPSILON);
+     assertEquals(TempratureUnit.CELSIUS, q.getUnit());
+ }
+
+ @Test
+ void testTemperatureBackwardCompatibility_UC1_Through_UC13() {
+     Quantity<LengthUnit> length = new Quantity<>(1.0, LengthUnit.FEET);
+     assertTrue(length.equals(new Quantity<>(12.0, LengthUnit.INCH)));
+
+     Quantity<WeightUnit> weight = new Quantity<>(1.0, WeightUnit.KILOGRAM);
+     assertTrue(weight.equals(new Quantity<>(1000.0, WeightUnit.GRAM)));
+
+     Quantity<VolumeUnit> volume = new Quantity<>(1.0, VolumeUnit.LITRE);
+     assertTrue(volume.equals(new Quantity<>(1000.0, VolumeUnit.MILLILITRE)));
+ }
+
+ @Test
+ void testTemperatureConversionPrecision_Epsilon() {
+     Quantity<TempratureUnit> q1 = new Quantity<>(50.0, TempratureUnit.CELSIUS);
+     Quantity<TempratureUnit> q2 = q1.toConvert(TempratureUnit.FAHRENHEIT);
+     Quantity<TempratureUnit> q3 = q2.toConvert(TempratureUnit.CELSIUS);
+
+     assertTrue(Math.abs(q1.getValue() - q3.getValue()) < 1e-6);
+ }
+
+ @Test
+ void testTemperatureEnumImplementsIMeasurable() {
+     assertTrue(TempratureUnit.CELSIUS instanceof IMeasurable);
+     assertTrue(TempratureUnit.FAHRENHEIT instanceof IMeasurable);
+     assertTrue(TempratureUnit.KELVIN instanceof IMeasurable);
+ }
 
 }
