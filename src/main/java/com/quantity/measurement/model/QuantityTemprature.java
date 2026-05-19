@@ -1,5 +1,4 @@
 package com.quantity.measurement.model;
-
 import com.quantity.measurement.enumsImpl.TempratureUnit;
 
 public class QuantityTemprature {
