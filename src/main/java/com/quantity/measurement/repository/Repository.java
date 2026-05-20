@@ -3,7 +3,7 @@ package com.quantity.measurement.repository;
 import com.quantity.measurement.entity.Entity;
 import java.util.List;
 
-import com.quantity.measurement.entity.Entity;
+
 
 public interface Repository{
 
