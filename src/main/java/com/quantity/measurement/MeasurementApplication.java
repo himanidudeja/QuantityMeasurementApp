@@ -1,4 +1,4 @@
-package QuantityMeasurementApp;
+package com.quantity.measurement;
 
 import com.quantity.measurement.controller.Controller;
 import org.slf4j.Logger;
